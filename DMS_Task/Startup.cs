@@ -72,7 +72,7 @@ namespace DMS_Task
                     b =>
                     {
                         b.UseNetTopologySuite();
-                        b.MigrationsAssembly("DAL");
+                        b.MigrationsAssembly("DMS_Task");
                     }
                     ));
 

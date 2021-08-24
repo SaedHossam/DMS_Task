@@ -4,7 +4,13 @@ namespace DAL
 {
     public interface IUnitOfWork
     {
-        //IApplicationRepository Application { get; }
+        IItemRepository Item { get; }
+        IOrderRepository Order { get; }
+        IOrderItemsRepository OrderItems { get; }
+        IShoppingCartRepository ShoppingCart { get; }
+        IShoppingCartItemRepository ShoppingCartItem { get; }
+        ICustomerRepository Customer { get; }
+        IUnitOfMeasureRepository UnitOfMeasure { get; }
         int SaveChanges();
     }
 }

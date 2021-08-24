@@ -15,9 +15,15 @@ namespace DAL
     {
         public string CurrentUserId { get; set; }
         //public DbSet<Job> Jobs { get; set; }
-        
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItems> OrderItems { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+        public DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
 
-        // Online Shopping Cart
+
 
         public ApplicationDbContext(DbContextOptions options) : base(options)
         { }

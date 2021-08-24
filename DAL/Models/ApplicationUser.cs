@@ -6,6 +6,8 @@ namespace DAL.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public int? CustomerId { get; set; }
+        public Customer Customer { get; set; }
 
     }
 }
