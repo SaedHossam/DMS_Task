@@ -56,19 +56,21 @@ namespace DMS_Task.Controllers
 
             await _userManager.AddToRoleAsync(user, Authorization.Roles.Employee.ToString());
             user.EmailConfirmed = true;
-            //var employee = new Employee() { UserId = user.Id, Photo = "Resources/images/user-m.png" };
-            //_unitOfWork.Employees.Add(employee);
+
+            var customer = new Customer() { Name = user.FirstName + " " + user.LastName, IsVisible = true, UserId = user.Id };
+            _unitOfWork.Customer.Add(customer);
+            
             _unitOfWork.SaveChanges();
 
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var param = new Dictionary<string, string>
-            {
-                {"token", token },
-                {"email", user.Email }
-            };
-            var callback = QueryHelpers.AddQueryString(userForRegistration.ClientURI, param);
-            var message = new Message(new string[] { userForRegistration.Email }, "Email Confirmation token", callback, null, false);
-            await _emailSender.SendEmailAsync(message);
+            //var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            //var param = new Dictionary<string, string>
+            //{
+            //    {"token", token },
+            //    {"email", user.Email }
+            //};
+            //var callback = QueryHelpers.AddQueryString(userForRegistration.ClientURI, param);
+            //var message = new Message(new string[] { userForRegistration.Email }, "Email Confirmation token", callback, null, false);
+            //await _emailSender.SendEmailAsync(message);
 
             return StatusCode(201);
         }

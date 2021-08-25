@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Models
+namespace DMS_Task.ViewModels
 {
-    public class UnitOfMeasure
+    public class UnitOfMeasureDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public bool IsVisible { get; set; }
-        public ICollection<Item> Items { get; set; }
+    }
+
+    public class UnitOfMeasureCreateDto
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

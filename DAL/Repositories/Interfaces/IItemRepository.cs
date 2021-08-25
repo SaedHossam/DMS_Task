@@ -9,5 +9,9 @@ namespace DAL.Repositories.Interfaces
 {
     public interface IItemRepository : IRepository<Item>
     {
+        public IEnumerable<Item> ItemsList();
+        public IEnumerable<Item> AvalibleItems();
+        public Item ItemData(int id);
+
     }
 }

@@ -9,5 +9,10 @@ namespace DAL.Repositories.Interfaces
 {
     public interface IShoppingCartRepository: IRepository<ShoppingCart>
     {
+        public ShoppingCart GetShoppingCartData(int customerId);
+        public int GetShoppingCartId(int CustomerId);
+        public ShoppingCart AddToCart(int ItemId, double Quantity, int customerId);
+
+        public void DeleteFromCart(int ItemId, int customerId);
     }
 }

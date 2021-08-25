@@ -1,0 +1,102 @@
+<app-side-menu></app-side-menu>
+
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-8 mx-auto">
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <form [formGroup]="itemForm" autocomplete="off" novalidate (ngSubmit)="addItem(itemForm)" #form>
+                        <h3 class="card-title text-primary fs-3">Job Details</h3>
+
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" placeholder="Name" formControlName="name">
+                            <small class="form-text text-muted">please Enter Unit Name.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" placeholder="Description"
+                                formControlName="description">
+                            <small class="form-text text-muted">please Enter Unit Description.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="avalibleQuantity">Avalible Quantity</label>
+                            <input type="number" class="form-control" placeholder="Avalible Quantity"
+                                formControlName="quantity" min="0">
+                            <small class="form-text text-muted">please Enter Avalible Quantity.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="unitPrice">Unit Price</label>
+                            <input type="number" class="form-control" placeholder="Unit Price"
+                                formControlName="unitPrice" min="0">
+                            <small class="form-text text-muted">please Enter unit Price(EGP).</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="discount">Discount %</label>
+                            <input type="number" class="form-control" placeholder="Discount" formControlName="discount"
+                                min="0">
+                            <small class="form-text text-muted">please Enter discount %.</small>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Unit Of Measure</label>
+                                <select class="form-select" [(ngModel)]="item.unitOfMeasureId" formControlName="unitOfMeasureId" name="unitOfMeasureId" >
+                                  <option *ngFor="let u of units"
+                                          [value]="u.id">
+                                    {{u.name}}
+                                  </option>
+                                </select>
+                              </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tax">Tax %</label>
+                            <input type="text" class="form-control" placeholder="Tax" formControlName="tax" min="0">
+                            <small class="form-text text-muted">please Enter tax %.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="limitPerCustomer">limit Per Customer</label>
+                            <input type="text" class="form-control" placeholder="limit / Customer"
+                                formControlName="limitPerCustomer" min="0">
+                            <small class="form-text text-muted">max number that cusomer can buy in a single
+                                order.</small>
+                        </div>
+                        <div class="form-group">
+                            <img [src]="imageUrl" alt="Item Image" class="img-fluid">
+                            <div class="col-12 col-sm-9 col-lg-10 mt-3 mt-sm-2" [formGroup]="imageUpload">
+                                <label for="file">Item Image</label>
+                                <p>You can upload a .jpg, .png, or .gif photo with max size of 1MB.</p>
+                                <em *ngIf="profilePhotoSizeError" class="mb-4 text-danger fw-bold">upload photo with max
+                                    size of 1MB, try reducing the quality <br /></em>
+                                <em *ngIf="profilePhotoTypeError" class="mb-4 text-danger fw-bold">upload valid image
+                                    <br /></em>
+
+                                <p-fileUpload mode="basic" name="file" url="./api/Item/upload"
+                                    accept="image/png, image/gif, image/jpeg" (onProgress)="onProgress($event)"
+                                    maxFileSize="1048576" (onUpload)="onUpload($event);" [auto]="true"
+                                    chooseLabel="upload photo" [disabled]="progress < 100"></p-fileUpload>
+
+                                <div *ngIf="progress < 100" class="d-inline-block position-relative">
+                                    <span class="position-absolute"
+                                        style="z-index: 5; top: 15px; left:10px">{{progress}}%</span>
+                                    <p-progressSpinner [style]="{width: '50px', height: '50px'}"
+                                        styleClass="custom-spinner" strokeWidth="5" fill="#EEEEEE"
+                                        animationDuration=".5s">
+                                    </p-progressSpinner>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" [disabled]="!itemForm.valid || !imageUploaded">Submit</button>
+                        <span class="ms-2 text-danger" *ngIf="!itemForm.valid">Fill the required fields</span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
