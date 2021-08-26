@@ -34,7 +34,7 @@ namespace DMS_Task.Controllers
             return Ok(_mapper.Map<IEnumerable<ItemListDto>>(items));
         }
 
-        // GET: api/Item/
+        // GET: api/Item/avalible
         [HttpGet("avalible")]
         public ActionResult<IEnumerable<ItemListDto>> GetAvalibleItems()
         {

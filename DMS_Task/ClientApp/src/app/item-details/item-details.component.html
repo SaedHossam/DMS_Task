@@ -1,0 +1,52 @@
+<div class="container pt-5">
+    <div class="row justify-content-between">
+        <div class="col-8 justify-content-between">
+            <div class="card py-3 px-3">
+
+                <div class="row mt-3 mx-2">
+                    <div class="col-4">
+                        <img [src]="item.imageUrl" class="img-fluid shadow h-75 w-100" alt="Item Photo"
+                            *ngIf="item.imageUrl != null">
+                        <img src="../../../../Resources/images/item.png" class="img-fluid shadow h-75 w-100"
+                            alt="Item Photo" *ngIf="item.imageUrl == null">
+                    </div>
+                    <div class="col-8">
+                        <div class="row">
+                            <h1>{{item.name}}</h1>
+                        </div>
+                        <div class="row">
+                            <h6>{{item.description}}</h6>
+                        </div>
+                        <div class="row">
+                            <h3>EGP {{item.unitPrice}}</h3>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-3">
+                                <select class="form-select" name="qty" id="qty" [(ngModel)]="selectedQty">
+                                    <option *ngFor="let i of selectQty" [value]="i">{{i}}</option>
+                                </select>
+                            </div>
+                            <div class="col-8">
+                                <button class="btn btn-warning w-100" (click)="addToCart(item.id)" [disabled]="item.avalibleQuantity <= 0">
+                                    Add To Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 pt-5">
+            <div class="card py-3 px-3">
+                <div class="row">
+                    <p class="text-black">Shipped Within: 3 Days</p>
+                </div>
+                <div class="row">
+                    <p>
+                        <strong class="text-black">Provider Name:</strong> XYZ Company
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,9 @@ import { CompanyGuard } from "./shared/guards/company.guard";
 import { EmployeeGuard } from "./shared/guards/employee.guard";
 import { EmployerRegisterComponent } from "./employer-register/employer-register.component";
 import { InternalServerComponent } from './error-pages/internal-server/internal-server.component';
+import { SearchItemsComponent } from './search-items/search-items.component';
+import { ItemDetailsComponent } from './item-details/item-details.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,6 +21,9 @@ const routes: Routes = [
   { path: 'employee', loadChildren: () => import("./modules/employee/employee.module").then(m => m.EmployeeModule), canActivate: [AuthGuard, EmployeeGuard] },
   { path: 'forbidden', component: ForbiddenComponent },
   { path: 'employer-register', component: EmployerRegisterComponent },
+  { path: 'search-items/:term', component: SearchItemsComponent },
+  { path: 'item/:id', component: ItemDetailsComponent },
+  { path: 'cart', component: CartComponent },
   { path: '404', component: NotFoundComponent },
   { path: '500', component: InternalServerComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

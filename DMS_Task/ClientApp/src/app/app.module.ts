@@ -34,6 +34,9 @@ import { MenubarModule } from 'primeng/menubar';
 import { CarouselModule } from 'primeng/carousel';
 import { InternalServerComponent } from './error-pages/internal-server/internal-server.component';
 import {ConfirmationService} from 'primeng/api';
+import { SearchItemsComponent } from './search-items/search-items.component';
+import { ItemDetailsComponent } from './item-details/item-details.component';
+import { CartComponent } from './cart/cart.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -48,6 +51,9 @@ export function tokenGetter() {
     HomeComponent,
     InternalServerComponent,
     EmployerRegisterComponent,
+    SearchItemsComponent,
+    ItemDetailsComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

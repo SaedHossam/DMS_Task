@@ -37,59 +37,63 @@ namespace DMS_Task.Contexts
                 await userManager.AddToRoleAsync(adminUser, Authorization.AdminRole.ToString());
             }
 
-            var companyUser = new ApplicationUser
-            {
-                UserName = Authorization.CompanyUserName,
-                Email = Authorization.CompanyEmail,
-                EmailConfirmed = true,
-                PhoneNumberConfirmed = true,
-                FirstName = "Company",
-                LastName = "Company"
-            };
+            //var companyUser = new ApplicationUser
+            //{
+            //    UserName = Authorization.CompanyUserName,
+            //    Email = Authorization.CompanyEmail,
+            //    EmailConfirmed = true,
+            //    PhoneNumberConfirmed = true,
+            //    FirstName = "Company",
+            //    LastName = "Company"
+            //};
 
-            if (userManager.Users.All(u => u.Id != companyUser.Id))
-            {
-                await userManager.CreateAsync(companyUser, Authorization.CompanyPassword);
-                await userManager.AddToRoleAsync(companyUser, Authorization.CompanyRole.ToString());
-            }
+            //if (userManager.Users.All(u => u.Id != companyUser.Id))
+            //{
+            //    await userManager.CreateAsync(companyUser, Authorization.CompanyPassword);
+            //    await userManager.AddToRoleAsync(companyUser, Authorization.CompanyRole.ToString());
+            //}
 
-            var employeeUser = new ApplicationUser
+            var customerUser = new ApplicationUser
             {
                 UserName = Authorization.EmployeeUserName,
                 Email = Authorization.EmployeeEmail,
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                FirstName = "Employee",
-                LastName = "Employee",
+                FirstName = "Customer",
+                LastName = "Name",
             };
 
-            if (userManager.Users.All(u => u.Id != employeeUser.Id))
+            if (userManager.Users.All(u => u.Id != customerUser.Id))
             {
-                await userManager.CreateAsync(employeeUser, Authorization.EmployeePassword);
-                await userManager.AddToRoleAsync(employeeUser, Authorization.EmployeeRole.ToString());
+                await userManager.CreateAsync(customerUser, Authorization.EmployeePassword);
+                await userManager.AddToRoleAsync(customerUser, Authorization.EmployeeRole.ToString());
             }
 
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
             var context = services.GetRequiredService<ApplicationDbContext>();
 
-            //if (!context.Skills.Any())
-            //{
-            //    var skills = new List<Skill>()
-            //    {
-            //        new Skill() {Name = "html"},
-            //        new Skill() {Name = "css"},
-            //        new Skill() {Name = "JavaScript"},
-            //        new Skill() {Name = "C#"},
-            //        new Skill() {Name = "bootstrap"},
+            if (!context.Customers.Any())
+            {
+                var customer = new Customer() {
+                    Name = customerUser.FirstName + customerUser.LastName,
+                    IsVisible = true
+                };
+                await context.Customers.AddAsync(customer);
+            }
 
-            //    };
 
-            //    await context.Skills.AddRangeAsync(skills);
-            //    await context.SaveChangesAsync();
-            //}
+            if (!context.UnitOfMeasures.Any())
+            {
+                var skills = new List<UnitOfMeasure>()
+                {
+                    new UnitOfMeasure() {Name = "KG", IsVisible = true, Description = "Kilogram"},
+                    new UnitOfMeasure() {Name = "Unit", IsVisible = true, Description = "One"},
+                    };
 
-            
+                await context.UnitOfMeasures.AddRangeAsync(skills);
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

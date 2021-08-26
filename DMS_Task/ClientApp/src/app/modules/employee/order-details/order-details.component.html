@@ -1,0 +1,72 @@
+<main class="main" id="top">
+    <div class="container mt-5">
+        <div class="card px-3 py-3" #o id="o">
+            <div class="row">
+                <div class="col-4">
+                    <div class="row">
+                        <h6>{{order.orderDate | date}}</h6>
+                    </div>
+                    <div class="row">
+                        <h6>Order No.: #{{order.id}}</h6>
+                    </div>
+                </div>
+                <div class="col-5"></div>
+                <div class="col-3">
+                    <div class="row">
+                        <h6>{{order.fullName}}</h6>
+                    </div>
+                    <div class="row">
+                        <h6>Payment Method: Cash</h6>
+                    </div>
+                    <div class="row">
+                        <h6>Total: {{order.totalPriceAfterTax | currency:'EGP'}} </h6>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row" *ngFor="let o of order.orderItems">
+                <div class="col-3 pb-3">
+                    <img [src]="o.imageUrl" alt="Item Image" class="img-fluid shadow" style="cursor: pointer;">
+                </div>
+                <div class="col-4">
+                    <div class="row">
+                        <h6>Name: {{o.name}}</h6>
+                    </div>
+                    <div class="row">
+                        <h6>Quantity: {{o.quantity}}</h6>
+                    </div>
+                </div>
+
+                <div class="col-2"></div>
+
+                <div class="col-3">
+                    <div class="row">
+                        <h6>Seller Name: Souq.com</h6>
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="col-9">
+                </div>
+
+                <div class="col-3">
+                    <h6>Total: {{order.totalPrice | currency:'EGP'}}</h6>
+                    <h6>Disc.: {{order.discount | currency:'EGP'}}</h6>
+                    <h6>Taxs.: {{order.tax | currency:'EGP'}}</h6>
+                    <hr>
+                    <h6>Final Price: {{order.totalPriceAfterTax | currency:'EGP'}}</h6>
+                </div>
+
+            </div>
+
+        </div>
+        <button class="btn btn-primary" (click)="printOrder()">Print Order</button>
+    </div>
+</main>

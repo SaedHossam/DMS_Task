@@ -4,16 +4,17 @@
       <div class="col-12 col-md-8 order-1 order-md-0">
         <div class="row">
           <h3>Items List</h3>
-          
+
           <div *ngFor="let i of items" class="col-4 mt-2">
             <div class="card shadow mb-3">
               <div class="card-body">
                 <div class="row g-0 px-1 ps-md-4 pe-md-3 py-3 align-items-center">
-                  <div class="col-12">
+                  <div class="col-12" (click)="itemDetails(i.id)" style="cursor: pointer;">
                     <img [src]="i.imageUrl" class="img-fluid shadow" alt="Item Photo" *ngIf="i.imageUrl != null">
-                    <img src="../../../../Resources/images/item.png" class="img-fluid shadow" alt="Item Photo" *ngIf="i.imageUrl == null">
+                    <img src="../../../../Resources/images/item.png" class="img-fluid shadow" alt="Item Photo"
+                      *ngIf="i.imageUrl == null">
                   </div>
-                  <div class="col-12">
+                  <div class="col-12" (click)="itemDetails(i.id)" style="cursor: pointer;">
                     <h4 class="card-title text-primary"> {{i.name}} <i class="bi bi-link-45deg"></i> </h4>
                   </div>
                   <div class="col-12">
@@ -29,71 +30,22 @@
 
           <div class="col">
             <td *ngIf="items?.length === 0" class="text-center fs-4" colspan="5">currently there is no
-                Items</td>
-            </div>
+              Items</td>
+          </div>
           <div class="d-flex justify-content-between p-2">
             <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-                (pageChange)="refreshItems()">
+              (pageChange)="refreshItems()">
             </ngb-pagination>
 
-            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize"
-                (ngModelChange)="refreshItems()">
-                <option [ngValue]="5">5 items per page</option>
-                <option [ngValue]="10">10 items per page</option>
-                <option [ngValue]="20">20 items per page</option>
+            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshItems()">
+              <option [ngValue]="5">5 items per page</option>
+              <option [ngValue]="10">10 items per page</option>
+              <option [ngValue]="20">20 items per page</option>
             </select>
-        </div>
+          </div>
 
         </div>
       </div>
     </div>
   </div>
 </main>
-
-
-<!-- Item Details Page -->
-<!-- <div class="container">
-  <div class="row justify-content-between">
-    <div class="col-8 card justify-content-between">
-      <div class="row mt-3 mx-2">
-        <div class="col-4">
-          <img src="../../assets/Images/gallery/user-m.png" class="img-fluid shadow h-75 w-100" alt="Item Photo">
-        </div>
-        <div class="col-8">
-          <div class="row">
-            <h1>Item Name</h1>
-          </div>
-          <div class="row">
-            <h6>Item Desc</h6>
-          </div>
-          <div class="row">
-            <h3>EGP 120</h3>
-          </div>
-          <div class="row mt-4">
-            <div class="col-3">
-              <select class="form-select" name="qty" id="qty">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-            <div class="col-8">
-              <button class="btn btn-warning w-100">
-                Add To Cart
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-3 card pt-5">
-      <div class="row">
-        <p class="text-black">Shipped Within: 3 Days</p>
-      </div>
-      <div class="row">
-        <p>
-          <strong class="text-black">Provider Name:</strong>  XYZ Company</p>
-      </div>
-    </div>
-  </div>
-</div> -->

@@ -1,0 +1,52 @@
+<main class="main" id="top">
+    <div class="container">
+      <div class="row justify-content-center my-5">
+        <div class="col-12 col-md-8 order-1 order-md-0">
+          <div class="row">
+            <h3>Items List</h3>
+            
+            <div *ngFor="let i of items" class="col-4 mt-2">
+              <div class="card shadow mb-3">
+                <div class="card-body">
+                  <div class="row g-0 px-1 ps-md-4 pe-md-3 py-3 align-items-center">
+                    <div class="col-12" (click)="itemDetails(i.id)" style="cursor: pointer;">
+                      <img [src]="i.imageUrl" class="img-fluid shadow" alt="Item Photo" *ngIf="i.imageUrl != null">
+                      <img src="../../../../Resources/images/item.png" class="img-fluid shadow" alt="Item Photo" *ngIf="i.imageUrl == null">
+                    </div>
+                    <div class="col-12" (click)="itemDetails(i.id)" style="cursor: pointer;">
+                      <h4 class="card-title text-primary"> {{i.name}} <i class="bi bi-link-45deg"></i> </h4>
+                    </div>
+                    <div class="col-12">
+                      <p class="card-text ">EGP <strong class="text-black">{{i.unitPrice}}</strong></p>
+                    </div>
+                    <div class="col-12">
+                      <button class="btn btn-warning w-100" (click)="addToCart(i.id)"> Add to Cart </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col">
+              <td *ngIf="items?.length === 0" class="text-center fs-4" colspan="5">currently there is no
+                  Items</td>
+              </div>
+            <div class="d-flex justify-content-between p-2">
+              <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                  (pageChange)="refreshItems()">
+              </ngb-pagination>
+  
+              <select class="custom-select" style="width: auto" [(ngModel)]="pageSize"
+                  (ngModelChange)="refreshItems()">
+                  <option [ngValue]="5">5 items per page</option>
+                  <option [ngValue]="10">10 items per page</option>
+                  <option [ngValue]="20">20 items per page</option>
+              </select>
+          </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  

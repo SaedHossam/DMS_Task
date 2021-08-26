@@ -24,15 +24,15 @@ export class HomeComponent implements OnInit {
   constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
-    this.adminService.getInsights().subscribe(i => {
-      this.insights = i;
+    
+      this.insights = null;
 
       const jobTypesLabels = [];
       const jobTypesData = [];
 
-      for (let item of this.insights.openJobsByType) {
-        jobTypesLabels.push(item.type);
-        jobTypesData.push(item.count);
+      for (let item of [1, 2, 3]) {
+        jobTypesLabels.push(item);
+        jobTypesData.push(item);
       }
 
       this.jobsByType = {
@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
       this.jobsByTypeOptions = {
         title: {
           display: true,
-          text: 'Open jobs by Type',
+          text: 'This is Static Data',
           fontSize: 16
         },
         legend: {
@@ -71,9 +71,9 @@ export class HomeComponent implements OnInit {
       const jobsCountryLabels = [];
       const jobCountryData = [];
 
-      for (let item of this.insights.openJobsByCountry) {
-        jobsCountryLabels.push(item.country);
-        jobCountryData.push(item.count);
+      for (let item of [1, 2, 3]) {
+        jobsCountryLabels.push(item);
+        jobCountryData.push(item);
       }
 
       this.jobsByCountry = {
@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
       this.jobsByCountryOptions = {
         title: {
           display: true,
-          text: 'Open jobs by Country',
+          text: 'This is Static Data',
           fontSize: 16
         },
         legend: {
@@ -112,9 +112,9 @@ export class HomeComponent implements OnInit {
       const jobsCategoryLabels = [];
       const jobCategoryData = [];
 
-      for (let item of this.insights.openJobsByJobCategory) {
-        jobsCategoryLabels.push(item.category);
-        jobCategoryData.push(item.count);
+      for (let item of [1, 2, 3]) {
+        jobsCategoryLabels.push(item);
+        jobCategoryData.push(item);
       }
 
       this.jobsByCategory = {
@@ -142,7 +142,7 @@ export class HomeComponent implements OnInit {
       this.jobsByCategoryOptions = {
         title: {
           display: true,
-          text: 'Open jobs by category',
+          text: 'This is Static Data',
           fontSize: 16
         },
         legend: {
@@ -153,9 +153,9 @@ export class HomeComponent implements OnInit {
       const totalJobsByDateLabels = [];
       const totalJobsByDateData = [];
 
-      for (let item of this.insights.totalJobsByDate) {
-        totalJobsByDateLabels.push(item.date);
-        totalJobsByDateData.push(item.count);
+      for (let item of [1, 2, 3]) {
+        totalJobsByDateLabels.push(item);
+        totalJobsByDateData.push(item);
       }
 
       this.totalJobsByDate = {
@@ -171,7 +171,7 @@ export class HomeComponent implements OnInit {
       this.totalJobsByDateOptions = {
         title: {
           display: true,
-          text: 'Total jobs by date',
+          text: 'This is Static Data',
           fontSize: 16
         },
         legend: {
@@ -187,6 +187,6 @@ export class HomeComponent implements OnInit {
           }]
         }
       };
-    });
+    
   }
 }

@@ -5,10 +5,10 @@
       <div class="text-info">Online</div>
       <div class="text-warning">Shopping</div>
     </a>
-    <form class="col-5 row row-cols-lg-auto align-items-center my-2" *ngIf='!isUserAdmin'>
+    <form class="col-5 row row-cols-lg-auto align-items-center my-2" *ngIf='!isUserAdmin' [formGroup]="searchForm" autocomplete="off" novalidate (ngSubmit)="searchItem(searchForm)">
       <div class="col-6 input-group">
-        <input type="text" class="form-control d-flex px-3 mx-5" placeholder="Search For Item">
-        <input type="submit" class="btn btn-primary rounded-pill" value="Search">
+        <input type="text" class="form-control d-flex px-3 mx-5" placeholder="Search For Item" formControlName="term">
+        <button class="btn btn-primary rounded-pill" value="Search" [disabled]="!searchForm.valid"> Search </button>
       </div>
     </form>
     <div class="col-2 my-2 g-3" ngbDropdown>
@@ -28,25 +28,24 @@
         [routerLinkActiveOptions]="{exact: true}">
           <i class="bi bi-box-arrow-in-right fs-5" ></i> Register
         </a>
-        <a ngbDropdownItem *ngIf='isUserAuthenticated && isUserEmployee' [routerLink]="['/authentication/login']" routerLinkActive="active"
+        <!-- <a ngbDropdownItem *ngIf='isUserAuthenticated && isUserEmployee' [routerLink]="['/authentication/login']" routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">
           <i class="bi bi-person fs-5"></i> My Profile
-        </a>
-        <!-- <a ngbDropdownItem *ngIf='isUserAuthenticated && isUserCompany' [routerLink]="['/company/editprofile']"> -->
-        <a ngbDropdownItem *ngIf='isUserAuthenticated && isUserEmployee' [routerLink]="['/authentication/login']" routerLinkActive="active"
+        </a> -->
+        <a ngbDropdownItem *ngIf='isUserAuthenticated && isUserEmployee' [routerLink]="['/employee/orders']" routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">
           <i class="bi bi-box-seam fs-5"></i> Orders
         </a>
-        <a ngbDropdownItem *ngIf='isUserAuthenticated && isUserAdmin' [routerLink]="['/authentication/login']" routerLinkActive="active"
+        <!-- <a ngbDropdownItem *ngIf='isUserAuthenticated && isUserAdmin' [routerLink]="['/authentication/login']" routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: true}">
           <i class="bi bi-person fs-5"></i> My Profile
-        </a>
+        </a> -->
         <div class="dropdown-divider" *ngIf='isUserAuthenticated'></div>
         <button ngbDropdownItem (click)="logout()" *ngIf='isUserAuthenticated'><i class="bi bi-box-arrow-left fs-5"></i> Logout</button>
       </div>
     </div>
     <div class="col-2">
-      <a class="btn border" href="#" *ngIf='!isUserAdmin'>
+      <a class="btn border" href="#" *ngIf='!isUserAdmin' [routerLink]="['/cart']">
         <i class="bi bi-cart4"></i> Cart
       </a>
     </div>

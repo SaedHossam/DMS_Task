@@ -14,5 +14,6 @@ namespace DAL.Repositories.Interfaces
         public ShoppingCart AddToCart(int ItemId, double Quantity, int customerId);
 
         public void DeleteFromCart(int ItemId, int customerId);
+        public void ResetCart(int CustomerId);
     }
 }

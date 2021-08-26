@@ -18,5 +18,11 @@ namespace DAL.Repositories
 
         private ApplicationDbContext _appContext => (ApplicationDbContext)_context;
 
+        public ShoppingCartItem GetCartItem(int CustomerId, int ItemId)
+        {
+            var cartItem = _appContext.ShoppingCartItems.Include(a => a.ShoppingCart).Where(c => c.ItemId == ItemId && c.ShoppingCart.CustomerId == CustomerId).FirstOrDefault();
+            return cartItem;
+        }
+
     }
 }

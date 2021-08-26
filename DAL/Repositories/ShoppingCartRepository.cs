@@ -63,5 +63,14 @@ namespace DAL.Repositories
         {
         }
 
+        public void ResetCart(int CustomerId)
+        {
+            var cart = _appContext.ShoppingCarts
+                            .Include(s => s.ShoppingCartItems)
+                            .Where(s => s.CustomerId == CustomerId)
+                            .FirstOrDefault();
+            _appContext.ShoppingCartItems.RemoveRange(cart.ShoppingCartItems);
+            _appContext.SaveChanges();
+        }
     }
 }

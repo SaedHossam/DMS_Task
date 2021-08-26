@@ -14,21 +14,21 @@ namespace DMS_Task.Constants
             Company
         }
 
-        public const string AdminUserName = "admin@wuzzufny.com";
-        public const string AdminEmail = "admin@wuzzufny.com";
+        public const string AdminUserName = "admin@shop.com";
+        public const string AdminEmail = "admin@shop.com";
         public const string AdminPassword = "Aa12345";
         public const Roles AdminRole = Roles.Administrator;
         public const string Admin = "Administrator";
 
-        public const string CompanyUserName = "company@wuzzufny.com";
-        public const string CompanyEmail = "company@wuzzufny.com";
-        public const string CompanyPassword = "Aa12345";
-        public const Roles  CompanyRole = Roles.Company;
-        public const string Company = "Company";
+        //public const string CompanyUserName = "company@shop.com";
+        //public const string CompanyEmail = "company@shop.com";
+        //public const string CompanyPassword = "Aa12345";
+        //public const Roles  CompanyRole = Roles.Company;
+        //public const string Company = "Company";
 
 
-        public const string EmployeeUserName = "emp@wuzzufny.com";
-        public const string EmployeeEmail = "emp@wuzzufny.com";
+        public const string EmployeeUserName = "customer@shop.com";
+        public const string EmployeeEmail = "customer@shop.com";
         public const string EmployeePassword = "Aa12345";
         public const Roles  EmployeeRole = Roles.Employee;
         public const string Employee = "Employee";

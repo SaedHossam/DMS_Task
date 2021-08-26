@@ -9,5 +9,6 @@ namespace DAL.Repositories.Interfaces
 {
     public interface IShoppingCartItemRepository : IRepository<ShoppingCartItem>
     {
+        public ShoppingCartItem GetCartItem(int CustomerId, int ItemId);
     }
 }

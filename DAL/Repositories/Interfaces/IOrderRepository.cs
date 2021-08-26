@@ -9,5 +9,8 @@ namespace DAL.Repositories.Interfaces
 {
     public interface IOrderRepository : IRepository<Order>
     {
+        public ICollection<Order> GetCustomerOrders(int CustomerId);
+        public int CreateOrder(int CustomerId);
+        public Order GetOrderById(int id);
     }
 }

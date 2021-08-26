@@ -27,7 +27,7 @@ namespace DMS_Task.Controllers
             _userManager = userManager;
         }
 
-        // GET: api/Item/
+        // GET: api/Carts/
         [HttpGet]
         [Authorize(Roles = "Employee")]
         public async Task<ActionResult<ShoppingCartDto>> GetCartItemsAsync()
@@ -56,7 +56,7 @@ namespace DMS_Task.Controllers
 
         // Add Item To Cart
 
-        // POST: api/Jobs
+        // POST: api/Carts
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [Authorize(Roles = "Employee")]
@@ -90,6 +90,44 @@ namespace DMS_Task.Controllers
             return Ok(_mapper.Map<ShoppingCartDto>(cart));
         }
 
+        // DELETE: api/Carts
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Employee")]
+        public async Task<ActionResult<ShoppingCartDto>> DeleteFromCartAsync(int id)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null)
+                return BadRequest("Can't find User!\nlogin and try again.");
+
+            var customer = _unitOfWork.Customer.Find(c => c.UserId == user.Id).FirstOrDefault();
+            if (customer == null)
+                return BadRequest("Can't find User!\nlogin and try again.");
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var item = _unitOfWork.Item.Get(id);
+            if (item == null)
+                return BadRequest("Item Not Found");
+
+            var cartItem = _unitOfWork.ShoppingCartItem.GetCartItem(customer.Id, id);
+            if (cartItem == null)
+                return BadRequest("Cart Item Not Found");
+            
+            _unitOfWork.ShoppingCartItem.Remove(cartItem);
+            _unitOfWork.SaveChanges();
+
+            var cart = _unitOfWork.ShoppingCart.GetShoppingCartData(customer.Id);
+            var cartItems = _mapper.Map<ShoppingCartDto>(cart);
+            foreach (var i in cartItems.ShoppingCartItems)
+            {
+                var x = i.UnitPrice - (i.UnitPrice * i.Discount / 100);
+                i.FinalPrice = x + (x * i.Tax / 100);
+                i.Discount = i.UnitPrice * i.Discount / 100;
+                i.Tax = (i.UnitPrice - i.Discount) * i.Tax / 100;
+            }
+            return Ok(cartItems);
+        }
         //// GET: api/Item/
         //[HttpGet("avalible")]
         //public ActionResult<IEnumerable<ItemListDto>> GetAvalibleItems()

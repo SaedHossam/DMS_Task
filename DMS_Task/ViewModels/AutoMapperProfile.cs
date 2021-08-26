@@ -53,6 +53,18 @@ namespace DMS_Task.ViewModels
                 .ForMember(c => c.ItemId, opt => opt.MapFrom(c => c.ItemId))
                 .ForMember(c => c.Quantity, opt => opt.MapFrom(c => c.Quantity))
                 .ForMember(c => c.Id, opt => opt.Ignore());
+
+            // Order Item
+            CreateMap<OrderItems, OrderItemDto>()
+                .ForMember(o => o.Name, opt => opt.MapFrom(o => o.Item.Name))
+                .ForMember(o => o.Quantity, opt => opt.MapFrom(o => o.Quantity))
+                .ForMember(o => o.ImageUrl, opt => opt.MapFrom(o => o.Item.ImageUrl));
+
+            // Order
+            CreateMap<Order, OrderListDto>()
+                .ForMember(o => o.FullName, opt => opt.MapFrom(o => o.Customer.Name))
+                .ForMember(o => o.Email, opt => opt.MapFrom(o => o.Customer.User.Email))
+                .ForMember(o => o.OrderDate, opt => opt.MapFrom(o => o.RequestDate));
         }
     }
 }

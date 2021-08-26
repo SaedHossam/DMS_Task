@@ -1,0 +1,51 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-8" *ngIf="cart.shoppingCartItems != null && cart.shoppingCartItems.length > 0">
+            <div class="card pt-2" *ngFor="let i of cart.shoppingCartItems">
+                <div class="row">
+                    <div class="col-4 h-100 text-start">
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-10">
+                                <img *ngIf="i.imageUrl == null" src="../../../../Resources/images/item.png" alt="item Image" class="img-fluid shadow h-100 w-100">
+                                <img *ngIf="i.imageUrl != null" [src]="i.imageUrl" alt="item Image" class="img-fluid shadow h-100 w-100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 pt-5 px-3 h-100 text-center">
+                        <div class="row fw-bold">Name : {{i.name}}</div>
+                        <div class="row fw-bold">Unit Price : EGP {{i.unitPrice}}</div>
+                        <div class="row">Overview : {{i.description}}</div>
+                    </div>
+                    <div class="col-4 h-100">
+                        <div class="row">
+                            <div class="col-6 pt-5">
+                                <h6 class="text-center"> <u> Quantity </u></h6>
+                                <h6 class="text-center">{{i.orderedQuantity}} {{i.unitOfMeasure}}</h6>
+                            </div>
+                            <div class="col-6"></div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col text-left mx-3 mb-3">
+                    <!-- <a href="#" class="btn btn-danger" (click)="deleteCartItem(i.itemId)"> Delete</a> -->
+                    <button class="btn btn-danger" (click)="deleteCartItem(i.itemId)"> Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-8" *ngIf="cart.shoppingCartItems == null || cart.shoppingCartItems.length <= 0">
+            No Items Added
+        </div>
+        <div class="col-3">
+            <div class="card py-3 px-5">
+                <div class="row">Total: {{totalPrice | currency:'EGP' }}</div>
+                <div class="row">Disc.: {{totalDiscount | currency:'EGP' }}</div>
+                <div class="row">Tax:   {{totalTax | currency:'EGP' }}</div>
+                <hr>
+                <div class="row fw-bold">Final Price: {{finalPrice | currency:'EGP' }} </div>
+                <button class="btn btn-success mt-1 text-center" [disabled]="cart.shoppingCartItems == null || cart.shoppingCartItems.length <= 0" (click)="checkout()">Confirm Order</button>
+            </div>
+        </div>
+    </div>
+</div>
