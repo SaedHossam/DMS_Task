@@ -37,21 +37,7 @@ namespace DMS_Task.Contexts
                 await userManager.AddToRoleAsync(adminUser, Authorization.AdminRole.ToString());
             }
 
-            //var companyUser = new ApplicationUser
-            //{
-            //    UserName = Authorization.CompanyUserName,
-            //    Email = Authorization.CompanyEmail,
-            //    EmailConfirmed = true,
-            //    PhoneNumberConfirmed = true,
-            //    FirstName = "Company",
-            //    LastName = "Company"
-            //};
-
-            //if (userManager.Users.All(u => u.Id != companyUser.Id))
-            //{
-            //    await userManager.CreateAsync(companyUser, Authorization.CompanyPassword);
-            //    await userManager.AddToRoleAsync(companyUser, Authorization.CompanyRole.ToString());
-            //}
+            
 
             var customerUser = new ApplicationUser
             {
@@ -77,9 +63,20 @@ namespace DMS_Task.Contexts
             {
                 var customer = new Customer() {
                     Name = customerUser.FirstName + customerUser.LastName,
-                    IsVisible = true
+                    IsVisible = true,
+                    UserId = customerUser.Id
                 };
                 await context.Customers.AddAsync(customer);
+                context.SaveChanges();
+
+                if (!context.ShoppingCarts.Any())
+                {
+                    var cart = new ShoppingCart()
+                    {
+                        CustomerId = customer.Id,
+                    };
+                    await context.ShoppingCarts.AddAsync(cart);
+                }
             }
 
 
